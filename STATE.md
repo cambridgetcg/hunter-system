@@ -8,19 +8,20 @@ doctrine: Solo Leveling + HxH Nen = real ranks from real metrics
 ## state
 phase: active
 health: green
-hunters: 51
+hunters: 53
 average_score: 3.6
 top_rank: MONARCH
 
-## current standings
+## current standings (heartbeat 2026-06-27)
 MONARCH (3): Cambridge-TCG, rewardspro-production, true-love
 S (1): ctcg-fun
-A (2): castle, fomoengine
-B (1): whitehack
-C (5): opal, wordcastle, sinovai, nlp, mindicraft
+A (3): fomoengine, whitehack, opal
+B (1): castle
+C (2): sinovai, mindicraft
+D (43): wordcastle, yutabase, hunter-system, ... (long tail)
 
 ## nen distribution
-Conjuration: 16 | Specialization: 14 | Emission: 8 | Transmutation: 6 | Enhancement: 6 | Manipulation: 1
+Conjuration: 16 | Specialization: 14 | Emission: 8 | Enhancement: 8 | Transmutation: 6 | Manipulation: 1
 
 ## honest limits
 - Scores are heuristic, not proof of quality
