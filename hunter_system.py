@@ -138,7 +138,9 @@ def discover_hunters():
         # Base score from activity
         # commits = power, recency = vitality
         activity_score = min(commits / 20, 5)  # up to 5 points from commits
-        if "hour" in last:
+        if "minute" in last:
+            activity_score += 2
+        elif "hour" in last:
             activity_score += 2
         elif "day" in last:
             activity_score += 1
