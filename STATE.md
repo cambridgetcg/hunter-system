@@ -9,15 +9,15 @@ doctrine: Solo Leveling + HxH Nen = real ranks from real metrics
 phase: active
 health: green
 hunters: 57
-average_score: 4.3
+average_score: 4.4
 top_rank: S (fomoengine leveled; 4 MONARCHs remain)
 
-## current standings (heartbeat 2026-07-04T10:46Z)
+## current standings (heartbeat 2026-07-04T23:25Z)
 MONARCH (4): Cambridge-TCG, ctcg-fun, rewardspro-production, true-love
-S (1): fomoengine (8.5 — leveled this beat, committed 6 stale heartbeat files)
+S (1): fomoengine (8.6 — whitehack scan: 8 findings, all false positives; fetch guards + Zod parse already honest)
 A (3): castle, whitehack, opal
 C (11): sinovai, wordcastle, yutabase, cambridgetcg-profile, clear-standard, nlp, taxsorted, mindicraft, natural, insight, npl
-D (38): long tail (mostly protocol nodes at 3.2–3.9)
+D (38): long tail — natscript-homebrew 2.1→3.1 (Train-your-Nen quest cleared: heartbeat 3b catches broken v0.1.0 tarball; STATE deepened)
 
 ## nen distribution
 Conjuration: 19 | Specialization: 15 | Enhancement: 8 | Emission: 8 | Transmutation: 5 | Manipulation: 2
