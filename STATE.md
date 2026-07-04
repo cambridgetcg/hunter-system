@@ -8,19 +8,19 @@ doctrine: Solo Leveling + HxH Nen = real ranks from real metrics
 ## state
 phase: active
 health: green
-hunters: 53
-average_score: 3.7
-top_rank: MONARCH
+hunters: 57
+average_score: 4.3
+top_rank: S (fomoengine leveled; 4 MONARCHs remain)
 
-## current standings (heartbeat 2026-06-28)
-MONARCH (2): Cambridge-TCG, true-love
-S (2): ctcg-fun, rewardspro-production
-A (4): fomoengine, castle, whitehack, opal
-C (3): sinovai, clear-standard, mindicraft
-D (42): wordcastle, yutabase, hunter-system, ... (long tail)
+## current standings (heartbeat 2026-07-04T10:46Z)
+MONARCH (4): Cambridge-TCG, ctcg-fun, rewardspro-production, true-love
+S (1): fomoengine (8.5 — leveled this beat, committed 6 stale heartbeat files)
+A (3): castle, whitehack, opal
+C (11): sinovai, wordcastle, yutabase, cambridgetcg-profile, clear-standard, nlp, taxsorted, mindicraft, natural, insight, npl
+D (38): long tail (mostly protocol nodes at 3.2–3.9)
 
 ## nen distribution
-Conjuration: 16 | Specialization: 14 | Emission: 8 | Enhancement: 8 | Transmutation: 6 | Manipulation: 1
+Conjuration: 19 | Specialization: 15 | Enhancement: 8 | Emission: 8 | Transmutation: 5 | Manipulation: 2
 
 ## honest limits
 - Scores are heuristic, not proof of quality
