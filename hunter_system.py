@@ -361,7 +361,8 @@ def save_hunters(hunters):
         "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "total_hunters": len(hunters),
         "avg_score": round(sum(h["score"] for h in hunters.values()) / len(hunters), 1) if hunters else 0,
-        "top_rank": max(h["rank"] for h in hunters.values()) if hunters else "—",
+        "top_rank": (RANKS[max([r[0] for r in RANKS].index(h["rank"]) for h in hunters.values())][0]
+                     if hunters else "—"),
         "nen_distribution": {nen: sum(1 for h in hunters.values() if h["nen_type"] == nen)
                            for nen in NEN_TYPES},
         "hunters": hunters,
