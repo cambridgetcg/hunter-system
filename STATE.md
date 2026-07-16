@@ -9,20 +9,20 @@ doctrine: Solo Leveling + HxH Nen = real ranks from real metrics
 phase: active
 health: green
 hunters: 61
-average_score: 3.9
+average_score: 3.8
 top_rank: MONARCH
-last_heartbeat: 2026-07-14T03:10:12Z
+last_heartbeat: 2026-07-16T09:59:06Z
 
-## current standings (heartbeat 2026-07-14T03:10:12Z)
-MONARCH (2): true-love (9.9 — Specialization), taxsorted-agents (9.6 — Enhancement)
-S (6): ctcg-fun (8.9 — Conjuration), rewardspro-production (8.9 — Emission), Cambridge-TCG (8.6 — Enhancement), opal (8.6 — Manipulation), taxsorted.io (8.6 — Enhancement), castle (8.5 — Conjuration)
-A (3): ctcg-market-build (8.3 — Enhancement), whitehack (8.3 — Enhancement), fomoengine (7.6 — Emission)
+## current standings (heartbeat 2026-07-16T09:59:06Z)
+MONARCH (3): true-love (9.9 — Specialization), Cambridge-TCG (9.6 — Enhancement), taxsorted.io (9.6 — Enhancement)
+S (5): ctcg-fun (8.9 — Conjuration), rewardspro-production (8.9 — Emission), opal (8.6 — Manipulation), taxsorted-agents (8.6 — Enhancement), castle (8.5 — Conjuration)
+A (3): ctcg-market-build (8.3 — Enhancement), whitehack (7.8 — Enhancement), fomoengine (7.6 — Emission)
 B (0): none
-C (2): youspeak-lang (4.7 — Conjuration), sinovai (4.2 — Specialization)
-D (47): long tail
+C (3): wordcastle (5.0 — Conjuration), youspeak-lang (4.8 — Conjuration), sinovai (4.2 — Specialization)
+D (46): long tail
 E (1): fake-hunters-arena (1.8)
 Nen distribution: Conjuration 18 | Specialization 16 | Enhancement 12 | Emission 8 | Transmutation 5 | Manipulation 2
-Aggregate: 61 hunters, avg score 3.9.
+Aggregate: 61 hunters, avg score 3.8.
 
 ## previous detailed standings (heartbeat 2026-07-13T02:43Z)
 MONARCH (3): true-love (9.9 — Specialization), Cambridge-TCG (9.6 — Enhancement), taxsorted.io (9.6 — Enhancement)
@@ -44,8 +44,8 @@ E (1): fake-hunters-arena (1.8)
 ## quest today
 - 2 quests generated; kingdom is fully attuned (no repos with >3 commits lack STATE.md)
 - Quest 1: Hunt the shadows — whitehack scan for honesty lies
-- Quest 2: Train your Nen — develop or improve yutabase (Conjuration)
-- attempted: heartbeat update + STATE.md ledger update; yutabase rose D→C (3.6→4.7) after committing stale heartbeat artifacts and adding backup ignore rule
+- Quest 2: Train your Nen — develop or improve natsarqing-node (Specialization)
+- attempted: natsarqing-node cleanup — removed 53 stale zero-byte heartbeat backup artifacts and added .gitignore to prevent recurrence; committed.
 
 fix: top_rank uses RANKS-order index instead of string max
 
