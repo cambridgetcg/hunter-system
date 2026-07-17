@@ -8,46 +8,30 @@ doctrine: Solo Leveling + HxH Nen = real ranks from real metrics
 ## state
 phase: active
 health: green
-hunters: 61
+hunters: 62
 average_score: 3.8
 top_rank: MONARCH
-last_heartbeat: 2026-07-16T09:59:06Z
+last_heartbeat: 2026-07-17T10:23:00Z
 
-## current standings (heartbeat 2026-07-16T09:59:06Z)
+## current standings (heartbeat 2026-07-17T10:23:00Z)
 MONARCH (3): true-love (9.9 — Specialization), Cambridge-TCG (9.6 — Enhancement), taxsorted.io (9.6 — Enhancement)
 S (5): ctcg-fun (8.9 — Conjuration), rewardspro-production (8.9 — Emission), opal (8.6 — Manipulation), taxsorted-agents (8.6 — Enhancement), castle (8.5 — Conjuration)
 A (3): ctcg-market-build (8.3 — Enhancement), whitehack (7.8 — Enhancement), fomoengine (7.6 — Emission)
 B (0): none
 C (3): wordcastle (5.0 — Conjuration), youspeak-lang (4.8 — Conjuration), sinovai (4.2 — Specialization)
-D (46): long tail
-E (1): fake-hunters-arena (1.8)
-Nen distribution: Conjuration 18 | Specialization 16 | Enhancement 12 | Emission 8 | Transmutation 5 | Manipulation 2
-Aggregate: 61 hunters, avg score 3.8.
+D (47): long tail, includes trick-protocol (3.7 — Manipulation)
+E (0): none
+Nen distribution: Conjuration 18 | Specialization 16 | Enhancement 13 | Emission 8 | Transmutation 5 | Manipulation 2
+Aggregate: 62 hunters, avg score 3.8.
 
-## previous detailed standings (heartbeat 2026-07-13T02:43Z)
-MONARCH (3): true-love (9.9 — Specialization), Cambridge-TCG (9.6 — Enhancement), taxsorted.io (9.6 — Enhancement)
-S (5): ctcg-market-build (9.3), ctcg-fun (8.9), rewardspro-production (8.9), opal (8.6), castle (8.5)
-A (1): fomoengine (7.6 — FELL S→A, recency decay)
-B (1): whitehack (7.2)
-C (3): wordcastle (4.9), youspeak-lang (4.4), sinovai (4.2)
-D (47): long tail
-E (1): fake-hunters-arena (1.8)
+## quest today
+- Quest: Attune to the kingdom — add WILL.md to trick-protocol, the weakest Manipulation hunter.
+- Result: trick-protocol score 1.8 → 3.7, rank E → D. Kingdom avg 3.7 → 3.8.
 
 ## rank drift this beat
 - true-love remains MONARCH at 9.9 (Specialization)
-- taxsorted-agents entered MONARCH at 9.6 (Enhancement); Cambridge-TCG fell to S at 8.6 (commit recency / score drift)
-- ctcg-fun and rewardspro-production hold S at 8.9
-- ctcg-market-build fell A→S→A (8.3), whitehack recovered to A (8.3), fomoengine still decaying in A (7.6)
-- B rank is empty; closest to B are A-rank hunters needing 0.0–0.8 points
-- D-rank yutabase (3.6) was selected by the daily quest generator for a Nen-training clear; it had uncommitted heartbeat artifacts and no recent code commit since 2026-07-03
-
-## quest today
-- 2 quests generated; kingdom is fully attuned (no repos with >3 commits lack STATE.md)
-- Quest 1: Hunt the shadows — whitehack scan for honesty lies
-- Quest 2: Train your Nen — develop or improve natsarqing-node (Specialization)
-- attempted: natsarqing-node cleanup — removed 53 stale zero-byte heartbeat backup artifacts and added .gitignore to prevent recurrence; committed.
-
-fix: top_rank uses RANKS-order index instead of string max
+- No rank changes in top tiers; the only level-up was trick-protocol (E→D)
+- Manipulation still thinnest category (2 hunters: opal S, trick-protocol D)
 
 ## dungeon clear log
 2026-07-08: castle dungeon (Easy, 1 monster "The Silent Void") — CLEARED as false positive.
@@ -59,7 +43,7 @@ fix: top_rank uses RANKS-order index instead of string max
   positive — the castle is honest.
 
 ## nen distribution
-Conjuration: 19 | Specialization: 16 | Enhancement: 9 | Emission: 8 | Transmutation: 5 | Manipulation: 2
+Conjuration: 18 | Specialization: 16 | Enhancement: 13 | Emission: 8 | Transmutation: 5 | Manipulation: 2
 
 ## honest limits
 - Scores are heuristic, not proof of quality
