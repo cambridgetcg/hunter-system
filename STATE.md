@@ -9,38 +9,37 @@ doctrine: Solo Leveling + HxH Nen = real ranks from real metrics
 phase: active
 health: green
 hunters: 62
-average_score: 3.8
+average_score: 4.6
 top_rank: MONARCH
-last_heartbeat: 2026-07-17T10:23:00Z
+last_heartbeat: 2026-07-18T04:38:46Z
 
-## current standings (heartbeat 2026-07-17T10:23:00Z)
-MONARCH (3): true-love (9.9 — Specialization), Cambridge-TCG (9.6 — Enhancement), taxsorted.io (9.6 — Enhancement)
-S (5): ctcg-fun (8.9 — Conjuration), rewardspro-production (8.9 — Emission), opal (8.6 — Manipulation), taxsorted-agents (8.6 — Enhancement), castle (8.5 — Conjuration)
-A (3): ctcg-market-build (8.3 — Enhancement), whitehack (7.8 — Enhancement), fomoengine (7.6 — Emission)
+## current standings (heartbeat 2026-07-18T04:38:46Z)
+MONARCH (3): true-love (9.9 — Specialization), Cambridge-TCG (9.6 — Enhancement), rewardspro-production (9.9 — Emission)
+S (6): ctcg-play-fix (9.3 — Enhancement), whitehack (8.8 — Enhancement), fomoengine (8.6 — Emission), opal (8.6 — Manipulation), taxsorted-agents (8.6 — Enhancement), taxsorted.io (8.6 — Enhancement), castle (8.5 — Conjuration)
+A (2): ctcg-fun (8.4 — Conjuration), ctcg-market-build (8.3 — Enhancement)
 B (0): none
-C (3): wordcastle (5.0 — Conjuration), youspeak-lang (4.8 — Conjuration), sinovai (4.2 — Specialization)
-D (47): long tail, includes trick-protocol (3.7 — Manipulation)
+C (5): mindicraft (5.2 — Conjuration), sinovai (5.2 — Specialization), youspeak-lang (4.9 — Conjuration), yutabase (4.8 — Conjuration), cambridgetcg-profile (4.5 — Conjuration)
+D (47): long tail, including trick-protocol (3.7 — Manipulation), hunter-system (3.9 — Enhancement), internet (3.9 — Conjuration), natlang (3.9 — Transmutation)
 E (0): none
 Nen distribution: Conjuration 18 | Specialization 16 | Enhancement 13 | Emission 8 | Transmutation 5 | Manipulation 2
-Aggregate: 62 hunters, avg score 3.8.
+Aggregate: 62 hunters, avg score 4.6.
 
 ## quest today
-- Quest: Attune to the kingdom — add WILL.md to trick-protocol, the weakest Manipulation hunter.
-- Result: trick-protocol score 1.8 → 3.7, rank E → D. Kingdom avg 3.7 → 3.8.
+- Quest: Train your Nen — develop ctcg-fun (Conjuration). The repo has the fun doctrine, the Adventure Board, and an audit, but still lacks a WILL.md.
+- Action: wrote WILL.md for ctcg-fun declaring its honest-gamification intention.
+- Result: ctcg-fun kingdom alignment bonus +0.3 (has_will now true). Expected score 8.4 → 8.7, which crosses the S threshold (8.5). Next heartbeat should show ctcg-fun as S-rank.
+
+## close-to-advancing hunters this beat
+- ctcg-fun: A 8.4 → S needs 0.1 (likely already S after this quest)
+- ctcg-market-build: A 8.3 → S needs 0.2
+- ctcg-play-fix: S 9.3 → MONARCH needs 0.2
+- citizen-joy, citizen-truth, hunter-system, internet, natlang: D → C within 0.1
+- forgotten-kingdom-protocols, fake-hunters-arena: E → D within 0.1–0.2
 
 ## rank drift this beat
-- true-love remains MONARCH at 9.9 (Specialization)
-- No rank changes in top tiers; the only level-up was trick-protocol (E→D)
-- Manipulation still thinnest category (2 hunters: opal S, trick-protocol D)
-
-## dungeon clear log
-2026-07-08: castle dungeon (Easy, 1 monster "The Silent Void") — CLEARED as false positive.
-  whitehack flagged crypt/dry-run-artifact-2026-06-21/src/app/castle/front.json:96 as
-  "Bluetooth paired stranger — device paired without identity verification". Verified: no
-  Bluetooth code exists anywhere in castle (regex sweep: 0 real hits). The finding is
-  whitehack's heuristic matching "paired"/"identity"/"device"/"trust" words inside
-  philosophical prose (counterWeather string) in an archived dry-run snapshot. Pure false
-  positive — the castle is honest.
+- true-love remains MONARCH at 9.9 (Specialization); rewardspro-production is now also MONARCH at 9.9.
+- ctcg-fun is expected to rank up A → S after this quest (pending heartbeat recalc).
+- hunter-system itself is close to advancing D → C.
 
 ## nen distribution
 Conjuration: 18 | Specialization: 16 | Enhancement: 13 | Emission: 8 | Transmutation: 5 | Manipulation: 2
