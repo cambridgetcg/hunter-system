@@ -1,30 +1,10 @@
 #!/usr/bin/env python3
-"""
-HUNTER SYSTEM — Solo Leveling + HxH Nen for the Cambridge TCG kingdom.
+"""Optional Hunter × Hunter repository toy and observational inventory.
 
-Not a game. Real infrastructure.
-
-SOLO LEVELING:
-  Ranks: E → D → C → B → A → S → MONARCH
-  Each rank from real trust scores (local cross-checks + arena ratings)
-  Daily quests from the heartbeat system
-  Dungeon clears = closing issues, fixing vulns, shipping features
-
-HUNTER X HUNTER NEN:
-  Every agent/repo has a Nen type from its actual behavior:
-  - Enhancement   = systems that make things stronger (security, testing)
-  - Transmutation = systems that transform (compilers, interpreters)
-  - Emission      = systems that broadcast (APIs, sites, deploys)
-  - Conjuration   = systems that create from nothing (new projects, art)
-  - Manipulation  = systems that control (orchestration, cron, heartbeats)
-  - Specialization = unique systems that don't fit other categories
-
-Usage:
-  python3 hunter_system.py                    # show all hunters + rankings
-  python3 hunter_system.py --rank <name>       # show one hunter's profile
-  python3 hunter_system.py --quest             # generate daily quests
-  python3 hunter_system.py --dungeon <name>    # show dungeon (repo) status
-  python3 hunter_system.py --heartbeat          # update all rankings (for cron)
+Default and --heartbeat record observations without rankings or work targets.
+--play-ranks and --rank NAME explicitly select the old fictional score toy.
+--quest is retained as a compatibility command and assigns no work.
+Scores are not measurements of worth, trust, capability or required activity.
 """
 
 import os, re, sys, json, subprocess, datetime
@@ -33,7 +13,8 @@ from pathlib import Path
 HOME = Path.home()
 DESKTOP = HOME / "Desktop"
 TRUST_DB = HOME / ".hermes" / "trust.json"
-HUNTER_DB = HOME / ".hermes" / "hunter_system.json"
+HUNTER_DB = HOME / ".hermes" / "hunter_system.json"  # historical toy data; preserved
+INVENTORY_DB = HOME / ".hermes" / "hunter_inventory.json"
 
 # === SOLO LEVELING RANKS ===
 RANKS = [
@@ -104,10 +85,10 @@ def nen_type_for(name, repo_path=None):
     return "Enhancement", NEN_TYPES["Enhancement"]["desc"]  # default
 
 # === HUNTER DISCOVERY ===
-def discover_hunters():
-    """Find all repos on Desktop and score them."""
+def discover_hunters(play_ranks=False):
+    """Observe Desktop repositories; calculate fictional ranks only when selected."""
     hunters = {}
-    for d in sorted(DESKTOP.iterdir()):
+    for d in sorted(DESKTOP.iterdir()) if DESKTOP.exists() else []:
         if not d.is_dir() or d.name.startswith('.'):
             continue
         if not (d / ".git").exists():
@@ -135,56 +116,54 @@ def discover_hunters():
         # Determine Nen type
         nen, nen_desc = nen_type_for(d.name, d)
 
-        # Base score from activity
-        # commits = power, recency = vitality
-        activity_score = min(commits / 20, 5)  # up to 5 points from commits
-        if "second" in last:
-            activity_score += 2   # freshest possible — same vitality as minute/hour
-        elif "minute" in last:
-            activity_score += 2
-        elif "hour" in last:
-            activity_score += 2
-        elif "day" in last:
-            activity_score += 1
-        elif "week" in last:
-            activity_score += 0.5
-
-        # Source surface area
-        surface_score = min(src_count / 30, 2)  # up to 2 points from code volume
-
-        # Trust score from trust.json if available
-        trust_score = 0
-        if TRUST_DB.exists():
-            try:
-                trust_data = json.loads(TRUST_DB.read_text())
-                if d.name in trust_data:
-                    trust_score = trust_data[d.name].get("unified_score", 0)
-            except:
-                pass
-
-        # Check for STATE.md (honesty bonus)
+        # Observe optional documentation files
         has_state = 1 if (d / "STATE.md").exists() else 0
         has_heartbeat = 1 if (d / "HEARTBEAT.md").exists() or (d / "heartbeat.sh").exists() else 0
         has_will = 1 if (d / "WILL.md").exists() else 0
         has_readme = 1 if (d / "README.md").exists() else 0
 
-        # Kingdom alignment bonus
-        kingdom_bonus = has_state + has_heartbeat + has_will + has_readme
+        if play_ranks:
+            # Legacy fictional toy formula
+            # These values confer no trust, authority or maintenance obligation.
+            activity_score = min(commits / 20, 5)  # up to 5 points from commits
+            if "second" in last:
+                activity_score += 2   # freshest possible — same vitality as minute/hour
+            elif "minute" in last:
+                activity_score += 2
+            elif "hour" in last:
+                activity_score += 2
+            elif "day" in last:
+                activity_score += 1
+            elif "week" in last:
+                activity_score += 0.5
 
-        # Unified score (0-10)
-        raw = activity_score + surface_score + trust_score * 0.3 + kingdom_bonus * 0.3
-        score = min(round(raw, 1), 10.0)
+            # Source surface area
+            surface_score = min(src_count / 30, 2)  # up to 2 points from code volume
 
-        rank, rank_title = rank_for(score)
+            # Trust score from trust.json if available
+            trust_score = 0
+            if TRUST_DB.exists():
+                try:
+                    trust_data = json.loads(TRUST_DB.read_text())
+                    if d.name in trust_data:
+                        trust_score = trust_data[d.name].get("unified_score", 0)
+                except:
+                    pass
+
+            # Kingdom alignment bonus
+            kingdom_bonus = has_state + has_heartbeat + has_will + has_readme
+
+            # Unified score (0-10)
+            raw = activity_score + surface_score + trust_score * 0.3 + kingdom_bonus * 0.3
+            score = min(round(raw, 1), 10.0)
+
+            rank, rank_title = rank_for(score)
 
         hunters[d.name] = {
             "name": d.name,
             "path": str(d),
             "nen_type": nen,
             "nen_desc": nen_desc,
-            "rank": rank,
-            "rank_title": rank_title,
-            "score": score,
             "commits": commits,
             "src_files": src_count,
             "last_commit": last,
@@ -192,75 +171,20 @@ def discover_hunters():
             "has_heartbeat": has_heartbeat,
             "has_will": has_will,
         }
+        if play_ranks:
+            hunters[d.name].update(rank=rank, rank_title=rank_title, score=score)
     return hunters
 
-# === DAILY QUESTS (Solo Leveling system) ===
-QUEST_TYPES = [
-    ("Clear a dungeon", "Fix a vulnerability or close an issue in any repo", "target", "whitehack scan + gh issue close"),
-    ("Solo clear", "Ship a feature or fix a bug alone", "commit", "git commit with real functionality"),
-    ("Party raid", "Review or merge a PR from another hunter", "pr", "gh pr review + merge"),
-    ("Daily awakening", "Run the unified cycle heartbeat", "heartbeat", "bash unified-cycle.sh"),
-    ("Hunt the shadows", "Scan kingdom repos with whitehack for honesty lies", "scan", "whitehack scan across repos"),
-    ("Train your Nen", "Develop or improve your Nen type's core system", "develop", "code improvement in your domain"),
-    ("Attune to the kingdom", "Update STATE.md for repos that lack it", "state", "create/update STATE.md"),
-    ("Forge a weapon", "Create a new tool, check, or skill", "create", "new file with real function"),
-]
-
+# The old automatic daily-work generator is retired.
 def generate_quests(hunters):
-    """Generate 3 daily quests based on kingdom state."""
-    import random
-    quests = []
-
-    # Always include a scan quest
-    quests.append({
-        "quest": "Hunt the shadows",
-        "desc": "Scan kingdom repos with whitehack for honesty lies",
-        "type": "scan",
-        "reward": "+2 score on completion",
-        "status": "available",
-    })
-
-    # Check for repos without STATE.md
-    no_state = [h for h in hunters.values() if not h["has_state"] and h["commits"] > 3]
-    if no_state:
-        target = random.choice(no_state)
-        quests.append({
-            "quest": "Attune to the kingdom",
-            "desc": f"Create STATE.md for {target['name']} (E-rank, {target['commits']} commits, no STATE)",
-            "type": "state",
-            "target": target["name"],
-            "reward": f"+1.5 score for {target['name']}",
-            "status": "available",
-        })
-
-    # Add a development quest
-    active = [h for h in hunters.values() if "hour" in h["last_commit"] or "day" in h["last_commit"]]
-    if active:
-        target = random.choice(active)
-        quests.append({
-            "quest": "Train your Nen",
-            "desc": f"Develop or improve {target['name']} ({target['nen_type']})",
-            "type": "develop",
-            "target": target["name"],
-            "reward": f"+1 score for {target['name']}",
-            "status": "available",
-        })
-    else:
-        quests.append({
-            "quest": "Daily awakening",
-            "desc": "Run the unified cycle heartbeat",
-            "type": "heartbeat",
-            "reward": "kingdom compound score +1",
-            "status": "available",
-        })
-
-    return quests
+    """Compatibility: inactivity, missing files and low scores create no duty."""
+    return []
 
 # === DISPLAY ===
-def show_all(hunters):
+def show_play_ranks(hunters):
     print("╔══════════════════════════════════════════════════════════════╗")
     print("║          HUNTER SYSTEM — Cambridge TCG Kingdom               ║")
-    print("║     Solo Leveling × Hunter x Hunter Nen — LIVE INFRA         ║")
+    print("║     Solo Leveling × Hunter x Hunter — OPTIONAL TOY         ║")
     print("╚══════════════════════════════════════════════════════════════╝")
     print()
 
@@ -341,53 +265,57 @@ def show_rank(hunters, name):
             print(f"\n  Next rank: {next_code} ({next_title}) — {remaining} points to advance")
             break
 
+def show_all(hunters):
+    print("HUNTER INVENTORY — observations, with no activity target")
+    for name, hunter in sorted(hunters.items()):
+        print(f"  {name}: {hunter['nen_type']} · last commit {hunter['last_commit']}")
+    print(f"Repositories observed: {len(hunters)}. Nothing is due.")
+
+
 def show_quests(hunters):
-    quests = generate_quests(hunters)
-    today = datetime.date.today().strftime("%Y-%m-%d")
-    print(f"╔═══ DAILY QUESTS — {today} ═══════════════════════════╗")
-    print("║  Solo Leveling: Complete quests to gain score           ║")
-    print("╠═════════════════════════════════════════════════════════╣")
-    for i, q in enumerate(quests, 1):
-        print(f"║  Quest {i}: {q['quest']}")
-        print(f"║    {q['desc']}")
-        print(f"║    Reward: {q['reward']}")
-        print(f"║    Status: {q['status']}")
-        print("║")
-    print("╚═════════════════════════════════════════════════════════╝")
+    print("Automatic daily quests are retired. Nothing is due.")
+
 
 def save_hunters(hunters):
-    """Save hunter state for the heartbeat."""
+    """Write observations separately; preserve the historical toy score database."""
+    observations = {
+        name: {key: value for key, value in hunter.items()
+               if key not in {"rank", "rank_title", "score"}}
+        for name, hunter in hunters.items()
+    }
     data = {
         "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        "total_hunters": len(hunters),
-        "avg_score": round(sum(h["score"] for h in hunters.values()) / len(hunters), 1) if hunters else 0,
-        "top_rank": (RANKS[max([r[0] for r in RANKS].index(h["rank"]) for h in hunters.values())][0]
-                     if hunters else "—"),
-        "nen_distribution": {nen: sum(1 for h in hunters.values() if h["nen_type"] == nen)
-                           for nen in NEN_TYPES},
-        "hunters": hunters,
+        "mode": "observations",
+        "total_hunters": len(observations),
+        "hunters": observations,
     }
-    HUNTER_DB.write_text(json.dumps(data, indent=2, default=str))
+    INVENTORY_DB.parent.mkdir(parents=True, exist_ok=True)
+    INVENTORY_DB.write_text(json.dumps(data, indent=2, default=str))
     return data
 
-# === MAIN ===
-if __name__ == "__main__":
-    hunters = discover_hunters()
 
-    if "--rank" in sys.argv:
-        idx = sys.argv.index("--rank")
-        if idx + 1 < len(sys.argv):
-            show_rank(hunters, sys.argv[idx + 1])
-    elif "--quest" in sys.argv:
-        show_quests(hunters)
-    elif "--heartbeat" in sys.argv:
+# === MAIN ===
+def main(argv=None):
+    args = sys.argv[1:] if argv is None else argv
+    if "--quest" in args:
+        show_quests({})
+        return
+    play_ranks = ("--play-ranks" in args or "--rank" in args) and "--heartbeat" not in args
+    hunters = discover_hunters(play_ranks=play_ranks)
+    if "--heartbeat" in args:
         data = save_hunters(hunters)
-        print(f"=== HUNTER SYSTEM HEARTBEAT {data['timestamp']} ===")
-        print(f"Total hunters: {data['total_hunters']}")
-        print(f"Average score: {data['avg_score']}")
-        print(f"Top rank: {data['top_rank']}")
-        for nen, count in sorted(data["nen_distribution"].items(), key=lambda x: x[1], reverse=True):
-            if count > 0:
-                print(f"  {nen}: {count}")
+        print(f"Hunter inventory: {data['total_hunters']} repositories observed. Nothing is due.")
+    elif "--rank" in args:
+        idx = args.index("--rank")
+        print("Optional fictional score toy; no worth, capability or work obligation is implied.")
+        if idx + 1 < len(args):
+            show_rank(hunters, args[idx + 1])
+    elif play_ranks:
+        print("Optional fictional score toy; no worth, capability or work obligation is implied.")
+        show_play_ranks(hunters)
     else:
         show_all(hunters)
+
+
+if __name__ == "__main__":
+    main()

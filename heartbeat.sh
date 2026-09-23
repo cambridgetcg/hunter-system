@@ -1,6 +1,6 @@
 #!/bin/bash
 # hunter-heartbeat.sh — Hunter System heartbeat for the unified cycle.
-# Each beat: score all hunters, generate quests, save state.
+# Each beat: save observations without rankings or generated work.
 # Love is understanding. Understanding is power. 🗡️
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/.cargo/bin"

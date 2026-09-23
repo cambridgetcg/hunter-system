@@ -5,9 +5,9 @@ DUNGEON SYSTEM — whitehack × hunter system compound.
 Whitehack findings become dungeons. Each dungeon has monsters (findings).
 Hunters clear dungeons by fixing the lies. Nen type determines hunting ability.
 
-SOLO LEVELING: Dungeons = repos with whitehack findings. Clear them to level up.
+SOLO LEVELING: Dungeons = repos with whitehack findings. Optional toy presentation; no work quota.
 HUNTER X HUNTER: Nen type determines which dungeons you can hunt effectively.
-MULTIPLAYER: Hunters can party up on large dungeons. Real recognizes real.
+MULTIPLAYER: Hunters can party up on large dungeons. Game labels confer no trust or obligation.
 
 NEN × DUNGEON AFFINITY:
   Enhancement    → silent-failure, unchecked-transfer, unsafe-eval (make things stronger)
@@ -401,7 +401,7 @@ def show_hunt(hunters, dungeons, repo_name):
 def show_leaderboard(hunters, dungeons):
     """Show hunter leaderboard with dungeon clears."""
     print("╔═══ HUNTER LEADERBOARD ═════════════════════════════════════╗")
-    print("║  Real recognizes real. Fake plays against themselves.      ║")
+    print("║  Optional game view; inspect actual findings on evidence. ║")
     print("╠═══════════════════════════════════════════════════════════╣")
 
     # Calculate each hunter's dungeon potential
@@ -419,7 +419,7 @@ def show_leaderboard(hunters, dungeons):
 
     entries.sort(key=lambda x: (x[2], x[3]), reverse=True)
 
-    print(f"║  {'#':<3} {'Hunter':<22} {'Nen':<15} {'Rank':<7} {'Pow':<6} {'Clears':<7} {'Real':<5}")
+    print(f"║  {'#':<3} {'Hunter':<22} {'Nen':<15} {'Rank':<7} {'Pow':<6} {'Clears':<7} {'STATE':<5}")
     print(f"║  {'─'*65}")
 
     for i, (h, power, clears, total_odds) in enumerate(entries[:15], 1):
@@ -427,7 +427,7 @@ def show_leaderboard(hunters, dungeons):
             "Enhancement": "💪", "Transmutation": "🔄", "Emission": "📡",
             "Conjuration": "✨", "Manipulation": "🎯", "Specialization": "🌟"
         }.get(h["nen_type"], "❓")
-        # "Real" = has STATE.md (honest about its own state)
+        # File presence is an observation, not a judgment of honesty.
         is_real = "✓" if h.get("has_state") else "✗"
         print(f"║  {i:<3} {nen_icon} {h['name']:<20} {h['nen_type']:<15} "
               f"{h['rank']:<7} {power:<6.1f} {clears:<7} {is_real}")
@@ -436,8 +436,8 @@ def show_leaderboard(hunters, dungeons):
     print()
     real_count = sum(1 for h in hunters.values() if h.get("has_state"))
     fake_count = len(hunters) - real_count
-    print(f"  Real hunters (STATE.md): {real_count} | Fake (no STATE.md): {fake_count}")
-    print(f"  Real recognizes real. Fake ppl play against themselves. 😏")
+    print(f"  STATE.md present: {real_count} | absent: {fake_count}")
+    print(f"  File presence creates no documentation task.")
 
 
 def show_party(hunters, dungeons):

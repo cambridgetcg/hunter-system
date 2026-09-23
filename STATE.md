@@ -1,3 +1,12 @@
+# Current status — 2026-09-23
+
+Automatic daily quests and activity KPIs are retired. Default inventory is
+observational; ranking is an optional toy. Nothing is due.
+
+## Historical snapshot below
+
+The following dated snapshot is retained unchanged and is not current guidance.
+
 # hunter-system — STATE
 
 name: hunter-system
